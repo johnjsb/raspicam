@@ -37,8 +37,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "raspicam_still.h"
 #include "private_still/private_still_impl.h"
 namespace raspicam {
-    RaspiCam_Still::RaspiCam_Still() {
+    RaspiCam_Still::RaspiCam_Still( int camera ) : cameraNum{ camera } {
         _impl= new _private::Private_Impl_Still() ;
+		_impl->setCamera(cameraNum);
     }
     RaspiCam_Still::~RaspiCam_Still() {
         release();

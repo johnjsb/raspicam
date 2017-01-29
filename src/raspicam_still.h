@@ -51,10 +51,11 @@ namespace raspicam {
     class RaspiCam_Still{
         //the implementation of the camera
         _private::Private_Impl_Still *_impl;
+		const int cameraNum;
 
         public:
         //Constructor
-        RaspiCam_Still();
+        RaspiCam_Still( int camera = 0 );//default for backwards compatability
         //Destructor
         ~RaspiCam_Still();
         // Opens camera connection

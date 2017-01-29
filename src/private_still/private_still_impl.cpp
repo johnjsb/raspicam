@@ -210,6 +210,18 @@ namespace raspicam {
             }
 
             camera_still_port = camera->output[MMAL_CAMERA_CAPTURE_PORT];
+			
+			//Choose physical camera, 0 is default, 1 is 2nd port of Compute Module
+			MMAL_PARAMETER_INT32_T camera_num =
+					{{MMAL_PARAMETER_CAMERA_NUM, sizeof(camera_num)}, _cameraNum};
+
+			status = mmal_port_parameter_set(camera->control, &camera_num.hdr);
+			if (status != MMAL_SUCCESS)
+			{
+                cerr << "Could not select camera " << _cameraNum << '\n';
+                mmal_component_destroy ( camera );
+                return 0;
+			}
 
             // Enable the camera, and tell it its control callback function
             if ( mmal_port_enable ( camera->control, control_callback ) ) {

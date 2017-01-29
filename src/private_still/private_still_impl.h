@@ -77,6 +77,7 @@ namespace raspicam {
             bool changedSettings;
             bool horizontalFlip;
             bool verticalFlip;
+			int _cameraNum;
 
             MMAL_FOURCC_T convertEncoding ( RASPICAM_ENCODING encoding );
             MMAL_PARAM_EXPOSUREMETERINGMODE_T convertMetering ( RASPICAM_METERING metering );
@@ -116,7 +117,8 @@ namespace raspicam {
                 camera_still_port = NULL;
                 encoder_input_port = NULL;
                 encoder_output_port = NULL;
-		_isInitialized=false;
+				_cameraNum = 0;//initialize to default port
+				_isInitialized=false;
             }
             int initialize();
             int startCapture ( imageTakenCallback userCallback, unsigned char * preallocated_data, unsigned int offset, unsigned int length );
@@ -143,6 +145,8 @@ namespace raspicam {
             void setMetering ( RASPICAM_METERING metering );
             void setHorizontalFlip ( bool hFlip );
             void setVerticalFlip ( bool vFlip );
+            //sets input camera, 0 is regular pi 1 is second compute module CSI port
+            void setCamera ( int camera );
 
             unsigned int getWidth();
             unsigned int getHeight();

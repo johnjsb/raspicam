@@ -537,6 +537,10 @@ namespace raspicam {
             verticalFlip = vFlip;
             changedSettings = true;
         }
+		
+		void Private_Impl_Still::setCamera ( int camera ) {
+            _cameraNum = camera;
+        }
 
         unsigned int Private_Impl_Still::getWidth() {
             return width;

@@ -215,8 +215,7 @@ namespace raspicam {
 			MMAL_PARAMETER_INT32_T camera_num =
 					{{MMAL_PARAMETER_CAMERA_NUM, sizeof(camera_num)}, _cameraNum};
 
-			status = mmal_port_parameter_set(camera->control, &camera_num.hdr);
-			if (status != MMAL_SUCCESS)
+			if (mmal_port_parameter_set(camera->control, &camera_num.hdr) != MMAL_SUCCESS)
 			{
                 cerr << "Could not select camera " << _cameraNum << '\n';
                 mmal_component_destroy ( camera );

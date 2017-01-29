@@ -39,8 +39,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "private/private_impl.h"
 namespace raspicam {
 
-    RaspiCam::RaspiCam() {
-        _impl=new _private::Private_Impl;
+    RaspiCam::RaspiCam( int camera ) : cameraNum{ camera } {
+        _impl=new _private::Private_Impl();
+		_impl->setCamera(cameraNum);
     }
     RaspiCam::~RaspiCam() {
         delete _impl;

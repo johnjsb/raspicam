@@ -52,7 +52,7 @@ namespace raspicam {
         public:
         /**Constructor
          */
-        RaspiCam();
+        RaspiCam( int camera = 0 );//default for backwards compatability
         /**Destructor
          */
         ~RaspiCam();
@@ -174,6 +174,7 @@ namespace raspicam {
         size_t getImageTypeSize ( RASPICAM_FORMAT type ) const;
         private:
         _private::Private_Impl *_impl;
+		const int cameraNum;
     };
 };
 #endif

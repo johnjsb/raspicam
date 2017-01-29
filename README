@@ -10,6 +10,8 @@ This library allows to use the Raspberry Pi Camera.
  - Many examples 
 
 * ChangeLog
+0.1.4
+  - Added support of different CSI ports, specifically to support the 2nd CSI port on the compute module.
 0.1.3
   - Native support for BGR and RGB in opencv classes. No need to do conversion anymore.
 0.1.2

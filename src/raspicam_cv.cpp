@@ -41,9 +41,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <opencv2/highgui/highgui.hpp>
 #include "scaler.h"
 namespace raspicam {
-    RaspiCam_Cv::RaspiCam_Cv() {
+    RaspiCam_Cv::RaspiCam_Cv( int camera ) : cameraNum{ camera } {
         _impl=new _private::Private_Impl();
-	set(CV_CAP_PROP_FORMAT,CV_8UC3);
+		_impl->setCamera(cameraNum);
+		set(CV_CAP_PROP_FORMAT,CV_8UC3);
  
     }
     RaspiCam_Cv::~RaspiCam_Cv() {

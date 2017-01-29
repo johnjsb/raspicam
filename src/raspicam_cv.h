@@ -51,7 +51,7 @@ namespace raspicam {
         public:
         /**Constructor
          */
-        RaspiCam_Cv();
+        RaspiCam_Cv( int camera = 0 );//default for backwards compatability
         /**Destructor
          */
         ~RaspiCam_Cv();
@@ -107,6 +107,7 @@ namespace raspicam {
 
         private:
         cv::Mat image;
+		const int cameraNum;
         int imgFormat;//required image format //
      };
 

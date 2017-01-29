@@ -57,6 +57,7 @@ namespace raspicam {
             _isCapturing=false;
             //set default state params
             setDefaultStateParams();
+			_cameraNum=0;//initialize to default port
         }
 
         Private_Impl::~Private_Impl() {
@@ -264,6 +265,18 @@ namespace raspicam {
             _rgb_bgr_fixed = !(mmal_util_rgb_order_fixed(video_port));
 
             //  set up the camera configuration
+			
+			//Choose physical camera, 0 is default, 1 is 2nd port of Compute Module
+			MMAL_PARAMETER_INT32_T camera_num =
+					{{MMAL_PARAMETER_CAMERA_NUM, sizeof(camera_num)}, _cameraNum};
+
+			status = mmal_port_parameter_set(camera->control, &camera_num.hdr);
+			if (status != MMAL_SUCCESS)
+			{
+                cerr << "Could not select camera " << _cameraNum;
+                mmal_component_destroy ( camera );
+                return 0;
+			}
 
             MMAL_PARAMETER_CAMERA_CONFIG_T cam_config;
             cam_config.hdr.id=MMAL_PARAMETER_CAMERA_CONFIG;
@@ -560,7 +573,9 @@ namespace raspicam {
 
         }
 
-
+		void Private_Impl::setCamera ( int camera ) {
+            _cameraNum = camera;
+        }
 
         void Private_Impl::setWidth ( unsigned int width ) {
             State.width = width;

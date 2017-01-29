@@ -123,7 +123,9 @@ namespace raspicam {
             /** Stops camera and free resources
             */
             void release();
-
+            //sets input camera, 0 is regular pi 1 is second compute module CSI port
+            void setCamera ( int camera );
+			
             //sets capture format. Can not be changed once camera is opened
             void setFormat ( RASPICAM_FORMAT fmt );
             //sets sensor mode. Can not be changed once camera is opened
@@ -273,7 +275,6 @@ namespace raspicam {
             MMAL_PARAM_EXPOSUREMETERINGMODE_T convertMetering ( RASPICAM_METERING metering ) ;
             int convertFormat ( RASPICAM_FORMAT fmt ) ;
 
-
             //Color conversion
 	    void convertBGR2RGB(unsigned char *  in_bgr,unsigned char *  out_rgb,int size);
             float VIDEO_FRAME_RATE_NUM;
@@ -285,6 +286,7 @@ namespace raspicam {
             bool _isCapturing;
 
             bool _rgb_bgr_fixed;
+			int _cameraNum;
 
 
         };

@@ -56,7 +56,7 @@ namespace raspicam {
         public:
         /**Constructor
          */
-        RaspiCam_Still_Cv();
+        RaspiCam_Still_Cv( int camera = 0 );//default for backwards compatability
         /**Destructor
          */
         ~RaspiCam_Still_Cv();
@@ -109,6 +109,7 @@ namespace raspicam {
 
         private:
         uchar *image_buffer;
+		const int cameraNum;
         bool _isOpened;
 	bool _isGrabbed;
 

@@ -40,8 +40,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "scaler.h"
 using namespace cv;
 namespace raspicam {
-    RaspiCam_Still_Cv::RaspiCam_Still_Cv() {
+    RaspiCam_Still_Cv::RaspiCam_Still_Cv( int camera ) : cameraNum{ camera } {
         _impl= new _private::Private_Impl_Still() ;
+		_impl->setCamera(cameraNum);
         _isOpened=false;
         image_buffer=0;
         _impl->setEncoding ( raspicam::RASPICAM_ENCODING_RGB );
